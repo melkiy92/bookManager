@@ -3,6 +3,7 @@ package com.trubaieva.bookManager.controller;
 import com.trubaieva.bookManager.dao.BookDAO;
 import com.trubaieva.bookManager.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class BookController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = { "/bookList" }, method = RequestMethod.GET)
     public String viewBookList(Model model) {
         bookList = bookDAO.findAll();
